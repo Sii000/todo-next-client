@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const SERVER_ENDPOINT = 'https://humble-space-giggle-4qw9qjp9rph7vwq-5000.app.github.dev'
+const SERVER_ENDPOINT = 'https://effective-disco-pjr5699prx4pf76x-5000.app.github.dev/'
 
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -19,6 +19,15 @@ export const useTodos = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(todo)
+      }
+    );
+    fetchTodos();
+  };
+  
+  const deleteTodo = async (index) => {
+    await fetch(`${SERVER_ENDPOINT}/todos/${index}`,
+      {
+        method: 'DELETE',
       }
     );
     fetchTodos();
@@ -42,9 +51,20 @@ export const useTodos = () => {
     fetchTodos();
   }, []);
 
+  const clearTodos = async () => {
+    await fetch(`${SERVER_ENDPOINT}/todos`,
+      {
+        method: 'DELETE',
+      }
+    );
+    fetchTodos();
+  };
+
   return {
     todos,
     addTodo,
     toggleTodo,
+    deleteTodo,
+    clearTodos,
   };
 };

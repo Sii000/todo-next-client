@@ -20,3 +20,4 @@ export const AddTodoForm = ({ onAdd }) => {
     <Button onClick={onClick}>Add todo</Button>
   </div>
 }
+
